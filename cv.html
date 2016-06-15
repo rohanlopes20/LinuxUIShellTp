@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rohan </title>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+	<body class="main">
+		<div class="linux_window">
+			<div class="txt_center color_white">Welcome to Linux Shell</div>
+			<div class="window_linux">
+				<div class="data_history">					
+				</div>
+				<div class=""><span class="path color_white">[root@localhost ~]$</span>
+				<input type="text" value="" class="no_border linux_type blink_me" /></div>
+			</div>
+		</div>
+		<div class="popuplogin">
+			<div class="green center_tab tab">
+				<div class="row"> Enter User Name : <input type="text" name="username" value="" placeholder="John Doe" class="right" /></div>
+				<div class="userErr color_red">Please enter username.</div>
+				<div class="row"> Enter Password  : <input type="password" name="password"  value="" placeholder="*****" class="right" /></div>
+				<div class="passErr color_red">Please enter password.</div>
+				<div class="tab"><input type="submit" value="Submit" class="center sub_bttn" onclick="checkLogin();" /></div>
+			</div>
+		</div>
+		<script type="text/javascript">
+
+		/**********************************************
+		*
+		*	Author 			: 	Rohan Philip Lopes
+		* 	Version 		: 	0.1
+		*	Date Modified	: 	14th Jun 2016
+		*
+		**********************************************/
+			var strCV = "";
+
+				$(document).ready( function () {
+					$('.userErr, .passErr').slideUp();
+					$('.linux_window').hide();
+
+					var warning_data = "<br /><pre>";
+						warning_data += "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br />";
+						warning_data += "+                           =====================                              +<br />";
+						warning_data += "+                           !!! W A R N I N G !!!                              +<br />";
+						warning_data += "+                           =====================                              +<br />";
+						warning_data += "+                                                                              +<br />";
+						warning_data += "+               This system is for the use of authorized users only.           +<br />";
+						warning_data += "+       Individuals using this computer system without authority, or in        +<br />";
+						warning_data += "+       excess of their authority, are subject to having all of their          +<br />";
+						warning_data += "+       activities on this system monitored and recorded by system             +<br />";
+						warning_data += "+       personnel.                                                             +<br />";
+						warning_data += "+       In the course of monitoring individuals improperly using this          +<br />";
+						warning_data += "+       system, or in the course of system maintenance, the activities         +<br />";
+						warning_data += "+       of authorized users may also be monitored.                             +<br />";
+						warning_data += "+       Anyone using this system expressly consents to such monitoring         +<br />";
+						warning_data += "+       and is advised that if such monitoring reveals possible                +<br />";
+						warning_data += "+       evidence of criminal activity, system personnel may provide the        +<br />";
+						warning_data += "+       evidence of such monitoring to law enforcement officials.              +<br />";
+						warning_data += "+                                                                              +<br />";
+						warning_data += "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br /></pre>";
+						
+						var history_span = "<span class=\"color_white\">[root@localhost ~]$ ";
+							history_span += warning_data;
+							history_span += "</span>"
+						$('.data_history').append(history_span);
+				});
+
+				$('.linux_type').keyup(function(event){
+					if (event.keyCode == 13) {
+						fnCheckCmd();
+					}
+				});
+
+				function fnCheckCmd(){
+					try{
+						var command = $('.linux_type').val();
+						
+						var history_span = "<span class=\"color_white\">[root@localhost ~]$ ";
+
+							if(command == "pwd") { 
+								history_span += history_span;
+								history_span += command;
+								history_span += "<br/>/home/tibusr/";
+								history_span += "<br/></span>"
+								$('.data_history').append(history_span);
+							} else if(command == "ls") { 
+								history_span += command;
+								history_span += "<br/>tibco.txt";
+								history_span += "<br/>tibems.tra";
+								history_span += "<br/></span>"
+								$('.data_history').append(history_span);
+							} else if(command == "whoami") { 
+								history_span += command;
+								history_span += "<br/>rohanlopes20";
+								history_span += "<br/></span>"
+								$('.data_history').append(history_span);
+							} else if(command == "show cv") { 
+								history_span += command;
+								history_span += "<br/>connecting to ............. rohanlopes20.herokuapp.com";
+								history_span += "<br/></span>"
+								$('.data_history').append(history_span);
+								OpenInNewTab('https://rohanlopes20.herokuapp.com');
+							} else {
+								history_span += command;
+								history_span += "</span><br />"
+								$('.data_history').append(history_span);
+							}
+						$('.linux_type').val("");
+					}catch(e){
+						console.error(e);
+					}
+				}
+
+				function OpenInNewTab(url) {
+					try {
+					 	var win = window.open(url, '_blank');
+					  	win.focus();
+					} catch (e) {
+						console.error(e);
+					}
+				}
+
+				function checkLogin() {
+					try {
+						var userName 		= $('input[name=username]').val();
+						var userPassword 	= $('input[name=password]').val();
+						// $('.userErr, .passErr').hide();
+						$('.userErr, .passErr').slideUp();
+						console.log(1);
+
+
+						if(userName ==""){
+							$('.userErr').slideDown();
+							$('.sub_bttn').addClass('bg_red');
+							$('.sub_bttn').addClass('color_white');
+							return;
+						} else if(userPassword =="") {
+							$('.passErr').slideDown();
+							$('.sub_bttn').addClass('bg_red');
+							$('.sub_bttn').addClass('color_white');
+
+							return;
+						} else if(userName =="rohanlopes20" && userPassword == "123") {
+							console.log(1);
+							$('.sub_bttn').removeClass('bg_red');
+							$('.sub_bttn').removeClass('color_white');
+							$('.popuplogin').hide();
+
+							//show linux
+							$('.linux_window').show();
+
+							return;
+						} else{
+							$('.popuplogin')[0].show();
+						}
+
+
+					} catch (e) {
+						console.error(e);
+					}
+				}
+
+				
+		</script>
+		<style type="text/css">
+			body{
+				font-family: Courier;
+				font-size: 12px;
+			}
+			input{
+				font-family: Courier;
+			}
+			.main {
+				background-color: black;
+			}
+			.row{
+				margin: 10px;
+			}
+			.right{
+				align: right;
+			}
+			.color_red{
+				color: red;
+			}
+			.color_white{
+				color: white !important;
+			}
+			.no_border{
+				border: none;
+			}
+			.userErr{
+				/*visibility: hidden;*/
+			}
+			.bg_red{
+				background-color: red;
+				color: white;
+			}
+			.passErr{
+				/*visibility: hidden;*/
+			}
+			.linux_type{
+			    background-color: black;
+			    color: white;
+			    padding: 3px;
+			    border: none; 
+			    border-color: inherit;
+				-webkit-box-shadow: none;
+			    box-shadow: none;
+			}
+			.linux_type:focus{
+			    border: none;
+			    outline:none;
+			    box-shadow: none;
+			}
+			.sub_bttn{
+				color: red;
+				border-radius: 5px;
+				padding: 5px 30px;
+    			font-size: 16px;
+			}
+			.txt_center{
+				text-align: center;
+			}
+			.tab
+			{
+				margin: 0px auto;
+				width: 360px;
+				text-align: center;
+				display: block;
+			}
+			.center_tab {
+				border: 2px solid green;
+				padding: 50px 100px;
+				margin: 92px auto;
+				width: 360px;
+				display: block;
+			}
+			/*.linux_window {
+				border: 2px solid green;
+				padding: 50px 100px;
+				margin: 92px auto;
+				width: 560px;
+				display: block;
+			}*/
+			.green {
+				color: green;
+				text-align: left;
+			}
+			.window_linux{
+				/*border: 2px solid green;*/
+				/*padding: 50px 100px;*/
+				/*margin: 92px auto;*/
+				position: fixed;
+				bottom: 0;
+			}
+		</style>
+	</body>
+</html>
