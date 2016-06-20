@@ -1,0 +1,12 @@
+{
+	'Data' : 
+		'questions': {
+				[{
+					'que': 'What are used of TIBCO?',
+					'ans': 'Middlewate Technology - Telecom, Banking etc.'
+				}, {
+					'que': 'What are used of TIBCO?',
+					'ans': 'Middlewate Technology - Telecom, Banking etc.'
+				}]
+			}
+}
